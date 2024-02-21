@@ -1,8 +1,25 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 0;
+  /* padding: 2rem;
+  text-align: center;  */
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+}
+
+p {
+  margin: 20px 0;
+}
+
+button {
+  border: 0;
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer
 }
 
 .logo {
@@ -12,10 +29,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em darkolivegreen);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #c1f58daa);
 }
 
 @keyframes logo-spin {
@@ -40,3 +57,41 @@
 .read-the-docs {
   color: #888;
 }
+
+header nav {
+ display: flex;
+ gap: 16px;
+ justify-content: end; /* sends the nav items to the right */
+ max-width: 1500px;
+ margin: 0 auto;
+ max-height: 80px;
+}
+
+header nav h1 {
+  margin-right: auto; /* this sets it to the left of the navs because of how you placed them */
+  border-bottom: 3px solid var(--primary);
+  margin-top: 5px;
+}
+
+header nav a {
+  text-decoration: none;
+  padding: 6px;
+  border-radius: 4px;
+  color: gray;
+}
+
+div h3 {
+  padding-top: 0px;
+  margin: 0px;
+  margin-left: 10px;
+}
+
+nav button {
+  color: black;
+  background-color: lightgrey;
+  max-height: 50px;
+}
+
+/* header nav:hover {
+  color: darkolivegreen;
+} */

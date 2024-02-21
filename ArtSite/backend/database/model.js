@@ -1,5 +1,8 @@
 import { DataTypes, Model } from "sequelize";
+import connectToDB from "./db.js";
+import util from "util";
 
+export const db = await connectToDB(`postgresql:///artists`);
 class User extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -8,10 +11,15 @@ class User extends Model {
 
 User.init(
   {
-    username: {
-      type: DataTypes.STRING(30),
+    userId: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
+    },
+    username: {
+      type: DataTypes.STRING(50),
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING(50),
@@ -21,7 +29,6 @@ User.init(
     },
     password: {
       type: DataTypes.STRING(50),
-      unique: true,
       required: true,
     },
   },
@@ -39,6 +46,11 @@ class Item extends Model {
 
 Item.init(
   {
+    itemId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: DataTypes.STRING(100),
     },
@@ -60,8 +72,17 @@ class Episode extends Model {
 
 Episode.init(
   {
+    episodeId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },
@@ -73,3 +94,18 @@ Episode.init(
     updatedAt: false,
   }
 );
+
+// User.belongsTo(Item, { foreignKey: "userId" });
+// Item.hasMany(User, { foreignKey: "userId" });
+
+// Item.belongsTo(User, { foreignKey: "userId" });
+// User.hasMany(Item, { foreignKey: "userId " });
+
+User.belongsToMany(Item, { through: "UserItem" });
+Item.belongsToMany(User, { through: "UserItem" });
+// userObj.addItem(itemObj)
+// itemObj.addUser(userObj)
+// itemObj.getUsers()
+// userObj.getItems()
+
+export { User, Item, Episode };

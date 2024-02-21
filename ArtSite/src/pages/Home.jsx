@@ -1,6 +1,10 @@
-import { Blog } from "./Blog"
-import { Podcast } from "./Podcast"
+// import { Blog } from "./Blog"
+// import { Podcast } from "./Podcast"
 
-export function Home() {
-    
+export default function Home() {
+return (
+    <div>
+        <h3>Welcome!</h3>
+    </div>
+)
 }
