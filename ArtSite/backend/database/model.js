@@ -52,7 +52,7 @@ Item.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    itemName: {
       type: DataTypes.STRING(100),
     },
     price: {
@@ -125,6 +125,37 @@ Order.init(
   }
 );
 
+class Admin extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+Admin.init(
+  {
+    adminId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      required: true,
+    },
+  },
+  {
+    modelName: "admin",
+    sequelize: db,
+  }
+);
+
 // User.belongsTo(Item, { foreignKey: "userId" });
 // Item.hasMany(User, { foreignKey: "userId" });
 
@@ -138,4 +169,4 @@ Item.belongsToMany(User, { through: "UserItem" });
 // itemObj.getUsers()
 // userObj.getItems()
 
-export { User, Item, Episode, Order };
+export { User, Item, Episode, Order, Admin };

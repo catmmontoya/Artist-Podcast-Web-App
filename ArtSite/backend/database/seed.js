@@ -1,4 +1,4 @@
-import { User, Item, Episode, Order, db } from "./model.js";
+import { User, Item, Episode, Order, Admin, db } from "./model.js";
 
 await db.sync({
   force: true,
@@ -83,6 +83,17 @@ let orders = [
 
 for (const order of orders) {
   await Order.create(order);
+}
+
+let admins = [
+  {
+    email: "catmm@gmail.com",
+    password: "greenismyfav",
+  },
+];
+
+for (const admin of admins) {
+  await Admin.create(admin);
 }
 
 await db.close();

@@ -21,8 +21,9 @@ app.use(
 //Routes
 
 app.get("/items", handlerFunctions.getAllItems);
-
 app.post("/auth", handlerFunctions.logIn);
+app.post("/addItem", handlerFunctions.addItem);
+app.post("/delete", handlerFunctions.deleteItem);
 
 //Run the server
 ViteExpress.listen(app, 8000, () =>

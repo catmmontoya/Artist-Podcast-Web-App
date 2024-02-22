@@ -2,7 +2,7 @@
 export default function Podcast() {
     return (
         <div>
-            <h3>The Pod</h3>
+            <h4>The Pod</h4>
         </div>
     )
 }
