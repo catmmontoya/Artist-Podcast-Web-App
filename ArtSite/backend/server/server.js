@@ -3,8 +3,6 @@ import morgan from "morgan";
 import session from "express-session";
 import ViteExpress from "vite-express";
 import handlerFunctions from "./controller.js";
-import { User, Item, Episode } from "../database/model";
-
 //create express instance
 const app = express();
 
@@ -21,27 +19,10 @@ app.use(
 );
 
 //Routes
-// function loginRequired(req, res) => {
-//   if (!req.session.userId) {
-//     res.status(401).json({ error: 'Must log in'})
-//   } else {
-//     next()
-//   }
-// }
 
-app.get("items", handlerFunctions.getAllItems);
+app.get("/items", handlerFunctions.getAllItems);
 
-app.post("/auth", async (req, res) => {
-  const { email, password } = res.body;
-  const user = await User.findOne({ where: { email: email } });
-
-  if (user && user.password === password) {
-    req.session.userId = user.userId;
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  }
-});
+app.post("/auth", handlerFunctions.logIn);
 
 //Run the server
 ViteExpress.listen(app, 8000, () =>

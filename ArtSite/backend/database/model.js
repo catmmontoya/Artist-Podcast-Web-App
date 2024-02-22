@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import connectToDB from "./db.js";
 import util from "util";
+import { setDefaultResultOrder } from "dns";
 
 export const db = await connectToDB(`postgresql:///artists`);
 class User extends Model {
@@ -95,6 +96,35 @@ Episode.init(
   }
 );
 
+class Order extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+Order.init(
+  {
+    orderId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+    },
+  },
+  {
+    modelName: "order",
+    sequelize: db,
+    timestamps: true,
+    createdAt: true,
+  }
+);
+
 // User.belongsTo(Item, { foreignKey: "userId" });
 // Item.hasMany(User, { foreignKey: "userId" });
 
@@ -108,4 +138,4 @@ Item.belongsToMany(User, { through: "UserItem" });
 // itemObj.getUsers()
 // userObj.getItems()
 
-export { User, Item, Episode };
+export { User, Item, Episode, Order };

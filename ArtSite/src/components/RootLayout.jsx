@@ -10,7 +10,9 @@ function RootLayout() {
           <NavLink to="/">home</NavLink>
           <NavLink to="blog">blog</NavLink>
           <NavLink to="podcast">podcast</NavLink>
-          <button type="button class="log-in>Log In</button>
+          <button className="nav-btn">
+              <NavLink to={"/login"}>Login</NavLink>
+            </button>
         </nav>
       </header>
       <main>

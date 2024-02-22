@@ -1,4 +1,4 @@
-import { User, Item, Episode, db } from "./model.js";
+import { User, Item, Episode, Order, db } from "./model.js";
 
 await db.sync({
   force: true,
@@ -35,8 +35,6 @@ let users = [
   },
 ];
 
-let episodes = [{}, {}];
-
 const user1 = await User.create({
   username: "Lee",
   email: "rj@gmail.com",
@@ -45,6 +43,46 @@ const user1 = await User.create({
 
 for (const user of users) {
   await User.create(user);
+}
+
+let episodes = [
+  {
+    name: "Girl things",
+    description:
+      "This one is about how you never know who's really there for you.",
+  },
+  {
+    name: "Silly things",
+    description:
+      "This one is about embarrassing moments that we wish we just laughed off but made way too big a deal about.",
+  },
+  {
+    name: "Manic things",
+    description: "This one is about how we can all get a little crazy...",
+  },
+];
+
+for (const episode of episodes) {
+  await Episode.create(episode);
+}
+
+let orders = [
+  {
+    quantity: "2",
+    totalPrice: 160,
+  },
+  {
+    quantity: "1",
+    totalPrice: 40,
+  },
+  {
+    quantity: "1",
+    totalPrice: 100,
+  },
+];
+
+for (const order of orders) {
+  await Order.create(order);
 }
 
 await db.close();
