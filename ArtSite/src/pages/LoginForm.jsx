@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios"
+import { useEffect } from "react";
 
 export default function LoginForm() {
     const [passwordValue, setPasswordValue] = useState('');
@@ -13,7 +14,7 @@ export default function LoginForm() {
             password: passwordValue
         }
             
-        await axios.post("/auth", bodyObj) 
+        await axios.post("login", bodyObj) 
         // axios assembles a gigantic 'request' object for you
         // if the method is .get() then axios will include a 'query' attribute to the reqest object
         // if method is .post()/.put()/.delete()... then axios will include a 'body' object
@@ -21,11 +22,31 @@ export default function LoginForm() {
         // = axios.post("endpoint/as/a/string", req.body)
         .then((res) => { // 'res' is our variable that receives the response object from the server
             console.log(res.data) // res.data is exactly what you are sending back from the server
-            console.log(res.data.success)
         })
     }
 
+    const sessionCheck = async () => {
+        const res = await axios.get("/api/sessionCheck")
+
+        if (res.data.success) {
+            setUserId(res.data.userId)
+            setUsernameValue("")
+            setPasswordValue("")
+        }
+    }
+
+    const handleLogout = async () => {
+        const res = await axios.get("logout")
+
+        if (res.data.success) {
+            setUserId(null)
+        }
+    }
+
+useEffect(() => {}, [])
+
     return (
+            
         <form
         onSubmit={handleLogin}>
             <label htmlFor="username">UserName:</label>
@@ -35,5 +56,6 @@ export default function LoginForm() {
 
             <button type="submit">Log In</button>
         </form>
+        
     )
 }

@@ -10,6 +10,11 @@ import axios from "axios"
 //Layouts
 import RootLayout from './components/RootLayout'
 
+//To, login user must enter email and password. Keep track with state values
+//When form is submitted send those values to my server as a req.body
+// const [username, setUsername] = useState('')
+// const [password, setPassword] = useState('')
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +23,18 @@ const router = createBrowserRouter(
     <Route path="blog" element={<Blog />} />
     <Route path="podcast" element={<Podcast />} />
     <Route path="login" element={<LoginForm />} />
+
+    {/* <input
+    type='text'
+    value={username} 
+    placeholder='Username'
+    onChange={(e) => setUsername(e.target.value)} />
+    <input 
+    type='password' 
+    value={password}
+    placeholder='Password'
+    onChange={(e) => setPassword(e.target.value)} /> */}
+
   </Route>
   )
 );

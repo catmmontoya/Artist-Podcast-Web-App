@@ -1,7 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connectToDB from "./db.js";
 import util from "util";
-import { setDefaultResultOrder } from "dns";
 
 export const db = await connectToDB(`postgresql:///artists`);
 class User extends Model {
@@ -78,11 +77,11 @@ Episode.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    episodeName: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    description: {
+    episodeDescription: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -156,17 +155,41 @@ Admin.init(
   }
 );
 
-// User.belongsTo(Item, { foreignKey: "userId" });
-// Item.hasMany(User, { foreignKey: "userId" });
+class Comment extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
 
-// Item.belongsTo(User, { foreignKey: "userId" });
-// User.hasMany(Item, { foreignKey: "userId " });
+Comment.init(
+  {
+    commentId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    input: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  },
+  {
+    modelName: "comment",
+    sequelize: db,
+  }
+);
 
 User.belongsToMany(Item, { through: "UserItem" });
 Item.belongsToMany(User, { through: "UserItem" });
+Comment.belongsTo(User, { foreignKey: "commentId" });
+User.hasMany(Order, { foreignKey: "orderId" });
+Order.belongsTo(User, { foreignKey: "orderId" });
+Item.hasMany(Order, { foreignKey: "orderId" });
+Order.belongsTo(Item, { foreignKey: "orderId" });
+
 // userObj.addItem(itemObj)
 // itemObj.addUser(userObj)
 // itemObj.getUsers()
 // userObj.getItems()
 
-export { User, Item, Episode, Order, Admin };
+export { User, Item, Episode, Order, Admin, Comment };
