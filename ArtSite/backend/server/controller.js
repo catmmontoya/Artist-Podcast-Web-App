@@ -18,9 +18,7 @@ import session from "express-session";
 
 const handlerFunctions = {
   getAllItems: async (req, res) => {
-    // console.log("HIT");
     const allItems = await Item.findAll();
-    // console.log(allItems);
     res.send(allItems);
   },
 
@@ -30,7 +28,6 @@ const handlerFunctions = {
   },
 
   //User
-
   sessionCheck: async (req, res) => {
     if (req.session.userId) {
       res.send({

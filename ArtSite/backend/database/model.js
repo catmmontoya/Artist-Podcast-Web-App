@@ -30,6 +30,7 @@ User.init(
     password: {
       type: DataTypes.STRING(50),
       required: true,
+      allowNull: false,
     },
   },
   {
@@ -53,9 +54,11 @@ Item.init(
     },
     itemName: {
       type: DataTypes.STRING(100),
+      allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
   {
@@ -186,7 +189,8 @@ User.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(User, { foreignKey: "orderId" });
 Item.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(Item, { foreignKey: "orderId" });
-
+Comment.belongsTo(User, { foreignKey: "commentId" });
+User.hasMany(Comment, { foreignKey: "commentId" });
 // userObj.addItem(itemObj)
 // itemObj.addUser(userObj)
 // itemObj.getUsers()

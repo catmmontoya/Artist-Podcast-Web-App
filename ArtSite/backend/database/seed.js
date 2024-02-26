@@ -6,11 +6,20 @@ await db.sync({
 
 let items = [
   {
-    name: "Hills Tapestry",
+    picture: "./images/tapestry1.jpg",
+    itemName: "Hills Tapestry",
     price: 40.0,
   },
-  { name: "Arches Tapestry", price: 60.0 },
-  { name: "Galaxy Tapestry", price: 100.0 },
+  {
+    picture: "./images/tapestry2.jpg",
+    itemName: "Arches Tapestry",
+    price: 60.0,
+  },
+  {
+    picture: "./images/tapestry3.jpg",
+    itemName: "Galaxy Tapestry",
+    price: 100.0,
+  },
 ];
 
 for (const item of items) {
@@ -36,7 +45,7 @@ let users = [
 ];
 
 const user1 = await User.create({
-  username: "Lee",
+  username: "lee",
   email: "rj@gmail.com",
   password: "santaclaus",
 });
@@ -47,18 +56,19 @@ for (const user of users) {
 
 let episodes = [
   {
-    name: "Girl things",
-    description:
+    episodeName: "Girl things",
+    episodeDescription:
       "This one is about how you never know who's really there for you.",
   },
   {
-    name: "Silly things",
-    description:
+    episodeName: "Silly things",
+    episodeDescription:
       "This one is about embarrassing moments that we wish we just laughed off but made way too big a deal about.",
   },
   {
-    name: "Manic things",
-    description: "This one is about how we can all get a little crazy...",
+    episodeName: "Manic things",
+    episodeDescription:
+      "This one is about how we can all get a little crazy...",
   },
 ];
 
@@ -68,15 +78,15 @@ for (const episode of episodes) {
 
 let orders = [
   {
-    quantity: "2",
+    quantity: 2,
     totalPrice: 160,
   },
   {
-    quantity: "1",
+    quantity: 1,
     totalPrice: 40,
   },
   {
-    quantity: "1",
+    quantity: 2,
     totalPrice: 100,
   },
 ];

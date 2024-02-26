@@ -1,10 +1,14 @@
 import { useState } from "react";
 import axios from "axios"
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
 
 export default function LoginForm() {
     const [passwordValue, setPasswordValue] = useState('');
     const [usernameValue, setUsernameValue] = useState('');
+
+    const userId = useSelector((state) => state.userId)
+    const dispatch = useDispatch()
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -22,25 +26,11 @@ export default function LoginForm() {
         // = axios.post("endpoint/as/a/string", req.body)
         .then((res) => { // 'res' is our variable that receives the response object from the server
             console.log(res.data) // res.data is exactly what you are sending back from the server
+            dispatch({
+                type: "USER_AUTH",
+                payload: res.data.userId
+            })
         })
-    }
-
-    const sessionCheck = async () => {
-        const res = await axios.get("/api/sessionCheck")
-
-        if (res.data.success) {
-            setUserId(res.data.userId)
-            setUsernameValue("")
-            setPasswordValue("")
-        }
-    }
-
-    const handleLogout = async () => {
-        const res = await axios.get("logout")
-
-        if (res.data.success) {
-            setUserId(null)
-        }
     }
 
 useEffect(() => {}, [])

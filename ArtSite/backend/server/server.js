@@ -19,13 +19,12 @@ app.use(
 );
 
 //Routes
-
-app.get("/items", handlerFunctions.getAllItems);
+app.get("/api/items", handlerFunctions.getAllItems);
 app.post("/login", handlerFunctions.logIn);
 app.post("/addItem", handlerFunctions.addItem);
 app.delete("/delete", handlerFunctions.deleteItem);
 app.get("/logout", handlerFunctions.logOut);
-app.get("/api/session-check");
+app.get("/api/session-check", handlerFunctions.sessionCheck);
 
 //Run the server
 ViteExpress.listen(app, 8000, () =>

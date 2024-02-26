@@ -5,7 +5,6 @@ import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Podcast from "./pages/Podcast"
 import LoginForm from './pages/LoginForm'
-import axios from "axios"
 
 //Layouts
 import RootLayout from './components/RootLayout'
@@ -15,6 +14,15 @@ import RootLayout from './components/RootLayout'
 // const [username, setUsername] = useState('')
 // const [password, setPassword] = useState('')
 
+// const sessionCheck = async () => {
+//   const res = await axios.get("/api/sessionCheck")
+
+//   if (res.data.success) {
+//       userId(res.data.userId)
+//       setUsernameValue("")
+//       setPasswordValue("")
+//   }
+// }
 
 const router = createBrowserRouter(
   createRoutesFromElements(
