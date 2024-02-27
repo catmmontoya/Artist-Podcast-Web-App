@@ -39,10 +39,10 @@ useEffect(() => {}, [])
             
         <form
         onSubmit={handleLogin}>
-            <label htmlFor="username">UserName:</label>
+            <label htmlFor="username">Username:</label>
             <input name="username" id="username" type="text" required onChange={(e) => setUsernameValue(e.target.value)} />
             <label htmlFor="password">Password:</label>
-            <input name="password" id="email" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
+            <input name="password" id="password" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
 
             <button type="submit">Log In</button>
         </form>

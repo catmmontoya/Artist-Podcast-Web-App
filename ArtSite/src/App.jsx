@@ -8,6 +8,8 @@ import LoginForm from './pages/LoginForm'
 
 //Layouts
 import RootLayout from './components/RootLayout'
+import SignupForm from './pages/SignupForm'
+import Cart from './components/Cart'
 
 //To, login user must enter email and password. Keep track with state values
 //When form is submitted send those values to my server as a req.body
@@ -31,6 +33,8 @@ const router = createBrowserRouter(
     <Route path="blog" element={<Blog />} />
     <Route path="podcast" element={<Podcast />} />
     <Route path="login" element={<LoginForm />} />
+    <Route path="signup" element={<SignupForm />} />
+    <Route path="cart" element={<Cart />} />
 
     {/* <input
     type='text'

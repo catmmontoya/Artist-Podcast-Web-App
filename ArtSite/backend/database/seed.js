@@ -1,4 +1,13 @@
-import { User, Item, Episode, Order, Admin, db } from "./model.js";
+import {
+  User,
+  Item,
+  Episode,
+  Order,
+  Admin,
+  Comment,
+  Post,
+  db,
+} from "./model.js";
 
 await db.sync({
   force: true,
@@ -6,17 +15,47 @@ await db.sync({
 
 let items = [
   {
-    picture: "./images/tapestry1.jpg",
-    itemName: "Hills Tapestry",
-    price: 40.0,
-  },
-  {
-    picture: "./images/tapestry2.jpg",
-    itemName: "Arches Tapestry",
+    picture: "images/tapestry1.jpg",
+    itemName: "Funfetti Tapestry",
     price: 60.0,
   },
   {
-    picture: "./images/tapestry3.jpg",
+    picture: "/images/tapestry2.jpg",
+    itemName: "Pastels Tapestry",
+    price: 50.0,
+  },
+  {
+    picture: "/images/tapestry3.jpg",
+    itemName: "Pink Woman Tapestry",
+    price: 100.0,
+  },
+  {
+    picture: "/images/tapestry4.jpg",
+    itemName: "Arches Tapestry",
+    price: 100.0,
+  },
+  {
+    picture: "/images/tapestry5.jpg",
+    itemName: "Sands Tapestry",
+    price: 100.0,
+  },
+  {
+    picture: "/images/tapestry6.jpg",
+    itemName: "Plus Tapestry",
+    price: 100.0,
+  },
+  {
+    picture: "/images/tapestry7.jpg",
+    itemName: "Falls Tapestry",
+    price: 100.0,
+  },
+  {
+    picture: "/images/tapestry8.jpg",
+    itemName: "Funfetti Necklace",
+    price: 15.0,
+  },
+  {
+    picture: "/images/tapestry9.jpg",
     itemName: "Galaxy Tapestry",
     price: 100.0,
   },
@@ -104,6 +143,28 @@ let admins = [
 
 for (const admin of admins) {
   await Admin.create(admin);
+}
+
+let posts = [
+  {
+    postName: "Stuff",
+    postText:
+      "oeinfgoerngoueanrgoienrofnerognreougneoragoerifmreifgnerogerogoergkkfdjgnieunrgkjenrgoiuneargljnsertighnaekrjgnkejng",
+  },
+  {
+    postName: "Things",
+    postText:
+      "iaywebrfnaiewybfaiwenfiewBFHUGREBKAEJRNFVKAJRWVCIHBERFGHBEARUGBadbrfyuserbvisernvisdrnviurnivnsr",
+  },
+  {
+    postName: "Places",
+    postText:
+      "iaerygbfiauenriunaweicvbaewgbcvweybfniauenfiunrbhivhjgnsbiveoarwenviawerunviearnivrensivhrnvhndibhnvidfsjnvijernvidjndfnvifdjnviajdfnv",
+  },
+];
+
+for (const post of posts) {
+  await Post.create(post);
 }
 
 await db.close();

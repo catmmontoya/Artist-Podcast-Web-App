@@ -5,8 +5,8 @@ import {
   Order,
   Admin,
   Comment,
+  Post,
 } from "../database/model.js";
-import session from "express-session";
 
 // function loginRequired(req, res) => {
 //     if (!req.session.userId) {
@@ -25,6 +25,11 @@ const handlerFunctions = {
   getAllEpisodes: async (req, res) => {
     const allEpisodes = await Episode.findAll();
     res.send(allEpisodes);
+  },
+
+  getAllBlogPosts: async (req, res) => {
+    const allBlogPosts = await Post.findAll();
+    res.send(allBlogPosts);
   },
 
   //User
@@ -65,17 +70,62 @@ const handlerFunctions = {
     });
   },
 
+  createUser: async (req, res) => {
+    const { username, email, password } = req.body;
+
+    if (await User.findOne({ where: { username } })) {
+      res.status(400).send({
+        message: "Username already in use",
+        userId: null,
+      });
+      return;
+    }
+    const user = await User.create({
+      username: username.toLowerCase(),
+      password,
+      email,
+    });
+
+    // if (req.session.adminId) {
+    //   res.status(200).send({
+    //     message: "New user created successfully",
+    //   });
+    //   return;
+    // }
+
+    //This needs to be part of the cart
+    // const user = await User.findOne({
+    //   where: {
+    //     username,
+    //   },
+    //   include: {
+    //     model: Order,
+    //     include: {
+    //       model: Item,
+    //     },
+    //   },
+    // });
+
+    req.session.userId = user.userId;
+
+    res.status(200).send({
+      message: "User created and logged in",
+      userId: user.userId,
+      user: user,
+    });
+  },
+
   buyItem: {},
 
   //Admin
   addItem: (req, res) => {
     const itemName = req.body.itemName;
-    const itemPic = req.body.itemPic;
+    const itemPic = req.body.picture;
     const itemPrice = req.body.price;
 
     const newItem = {
-      name: itemName,
-      pic: itemPic,
+      itemName: itemName,
+      picture: itemPic,
       price: itemPrice,
     };
 

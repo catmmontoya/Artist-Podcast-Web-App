@@ -18,6 +18,15 @@ const handleLogout = async () => {
   }
 }
 
+const handleClick = async () => {
+  if (userId) {
+    // await axios.post("/")
+    navigate("/cart")
+  } else {
+    navigate("/signup")
+  }
+}
+
   return (
     <>
     <div className="root-layout">
@@ -33,9 +42,12 @@ const handleLogout = async () => {
             </button>
             }
             {userId && 
+            <>
               <button onClick={handleLogout} className="nav-btn">Log Out
                 {/* <NavLink to={"/logout"}>Log Out</NavLink> */}
               </button>
+              <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" onClick={handleClick} />
+              </>
             }
         </nav>
       </header>

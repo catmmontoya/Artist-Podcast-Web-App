@@ -18,7 +18,7 @@ const myItems = items.map((item) => <Card item={item} key={item.itemId} />)
 
 return (<>
     <div>
-        <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me.</h4>
+        <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
     </div>
     {myItems}
     </>

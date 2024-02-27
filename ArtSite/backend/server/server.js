@@ -25,6 +25,9 @@ app.post("/addItem", handlerFunctions.addItem);
 app.delete("/delete", handlerFunctions.deleteItem);
 app.get("/logout", handlerFunctions.logOut);
 app.get("/api/session-check", handlerFunctions.sessionCheck);
+app.get("/blog", handlerFunctions.getAllBlogPosts);
+app.get("/podcast", handlerFunctions.getAllEpisodes);
+app.post("/user/create", handlerFunctions.createUser);
 
 //Run the server
 ViteExpress.listen(app, 8000, () =>

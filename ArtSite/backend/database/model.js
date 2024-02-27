@@ -52,6 +52,9 @@ Item.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    picture: {
+      type: DataTypes.STRING,
+    },
     itemName: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -91,6 +94,38 @@ Episode.init(
   },
   {
     modelName: "episode",
+    sequelize: db,
+    timestamps: true,
+    createdAt: true,
+    updatedAt: false,
+  }
+);
+
+class Post extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+Post.init(
+  {
+    postId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    postName: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    postText: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      required: true,
+    },
+  },
+  {
+    modelName: "post",
     sequelize: db,
     timestamps: true,
     createdAt: true,
@@ -191,9 +226,11 @@ Item.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(Item, { foreignKey: "orderId" });
 Comment.belongsTo(User, { foreignKey: "commentId" });
 User.hasMany(Comment, { foreignKey: "commentId" });
+Comment.belongsTo(Episode, { foreignKey: "commentId" });
+Episode.hasMany(Comment, { foreignKey: "commentId" });
 // userObj.addItem(itemObj)
 // itemObj.addUser(userObj)
 // itemObj.getUsers()
 // userObj.getItems()
 
-export { User, Item, Episode, Order, Admin, Comment };
+export { User, Item, Episode, Order, Admin, Comment, Post };
