@@ -167,4 +167,8 @@ for (const post of posts) {
   await Post.create(post);
 }
 
+// let cartItems = [
+//   {}
+// ]
+
 await db.close();

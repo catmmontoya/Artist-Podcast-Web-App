@@ -92,6 +92,21 @@ img.card-img {
   color: rgb(144, 144, 144);
 }
 
+.btn-img {
+  max-width: 30px;
+}
+
+.ep-card {
+  border-radius: 10px;
+  border: 1px solid gray;
+  margin: 1em;
+  padding: 2em;
+  display: inline-block;
+  text-align: unset;
+  min-width: 1200px;
+  min-height: 250px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

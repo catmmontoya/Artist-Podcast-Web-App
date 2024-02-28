@@ -93,7 +93,16 @@ const handlerFunctions = {
     //   return;
     // }
 
-    //This needs to be part of the cart
+    req.session.userId = user.userId;
+
+    res.status(200).send({
+      message: "User created and logged in",
+      userId: user.userId,
+      user: user,
+    });
+  },
+
+  addToCart: {
     // const user = await User.findOne({
     //   where: {
     //     username,
@@ -105,14 +114,6 @@ const handlerFunctions = {
     //     },
     //   },
     // });
-
-    req.session.userId = user.userId;
-
-    res.status(200).send({
-      message: "User created and logged in",
-      userId: user.userId,
-      user: user,
-    });
   },
 
   buyItem: {},

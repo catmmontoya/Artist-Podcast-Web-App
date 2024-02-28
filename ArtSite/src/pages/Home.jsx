@@ -1,7 +1,6 @@
 import Card from "../components/ShopCard"
 import axios from "axios"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 export default function Home() {
     const [items, setItems] = useState([])
@@ -16,7 +15,8 @@ useEffect(() => {cards()}, [])
 
 const myItems = items.map((item) => <Card item={item} key={item.itemId} />)
 
-return (<>
+return (
+<>
     <div>
         <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
     </div>

@@ -29,7 +29,7 @@ function SignupForm() {
                 type: "USER_AUTH",
                 payload: res.data.userId
             });
-            // navigate("/cart");
+            navigate("/cart");
             notify("success", res.data.message)
         })
         .catch((error) => {
@@ -40,6 +40,7 @@ function SignupForm() {
   return (
     <form
          onSubmit={handleSignup}>
+            <h2>Let's set up your account!</h2>
             <label htmlFor="username">Create username:</label>
             <input name="username" id="username" type="text" required onChange={(e) => setUsername(e.target.value)} />
             

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginForm() {
     const [passwordValue, setPasswordValue] = useState('');
@@ -9,6 +10,7 @@ export default function LoginForm() {
 
     const userId = useSelector((state) => state.userId)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -30,6 +32,7 @@ export default function LoginForm() {
                 type: "USER_AUTH",
                 payload: res.data.userId
             })
+            navigate("/")
         })
     }
 

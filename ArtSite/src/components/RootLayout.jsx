@@ -18,9 +18,9 @@ const handleLogout = async () => {
   }
 }
 
-const handleClick = async () => {
+const buttonClick = async () => {
   if (userId) {
-    // await axios.post("/")
+    // await axios.post("/cart")
     navigate("/cart")
   } else {
     navigate("/signup")
@@ -34,8 +34,8 @@ const handleClick = async () => {
         <nav>
           <h1>CAT MONTOYA</h1>
           <NavLink to="/">home</NavLink>
-          <NavLink to="blog">blog</NavLink>
-          <NavLink to="podcast">podcast</NavLink>
+          <NavLink to="/blog">blog</NavLink>
+          <NavLink to="/podcast">podcast</NavLink>
           {!userId && 
           <button className="nav-btn">
               <NavLink to={"/login"}>Log In</NavLink>
@@ -46,7 +46,9 @@ const handleClick = async () => {
               <button onClick={handleLogout} className="nav-btn">Log Out
                 {/* <NavLink to={"/logout"}>Log Out</NavLink> */}
               </button>
-              <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" onClick={handleClick} />
+              <button id="imageButton" onclick={buttonClick}> 
+                  <img className="btn-img" src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Button Image" /> 
+              </button> 
               </>
             }
         </nav>
