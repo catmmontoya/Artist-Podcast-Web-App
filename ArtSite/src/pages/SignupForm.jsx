@@ -20,7 +20,7 @@ function SignupForm() {
             password
         }
 
-        axios.post("/user/create", SignupBody)
+        axios.post("/api/user/create", SignupBody)
         .then((res) => {
             // evaluate res.data to find if the server responded to an admin being logged in
             // server-side: if admin was already logged in, the user is simply created

@@ -3,12 +3,14 @@ import axios from "axios"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { Form } from "react-bootstrap"
 
 export default function LoginForm() {
     const [passwordValue, setPasswordValue] = useState('');
     const [usernameValue, setUsernameValue] = useState('');
+    const [checked, setChecked] = useState('') 
 
-    const userId = useSelector((state) => state.userId)
+    // const userId = useSelector((state) => state.userId)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -19,8 +21,21 @@ export default function LoginForm() {
             username: usernameValue.toLowerCase(),
             password: passwordValue
         }
-            
-        await axios.post("login", bodyObj) 
+         
+        if (checked) {
+            axios.post("api/login/admin", bodyObj)
+            .then((res) => {
+                dispatch({
+                    type: "ADMIN_AUTH",
+                    payload: res.data.adminId
+                });
+                navigate("/")
+            })
+            // .catch((error) => {
+            //     console.error("error", error.res.data.message)
+            // })
+        } else {
+        await axios.post("/api/login", bodyObj) 
         // axios assembles a gigantic 'request' object for you
         // if the method is .get() then axios will include a 'query' attribute to the reqest object
         // if method is .post()/.put()/.delete()... then axios will include a 'body' object
@@ -34,21 +49,31 @@ export default function LoginForm() {
             })
             navigate("/")
         })
-    }
+        // .catch((error) => {
+        //     console.error("error", error.res.data.message)
+        // })
+    }}
+
+    const handleCheck = () => setChecked(!checked);
 
 useEffect(() => {}, [])
 
     return (
-            
         <form
         onSubmit={handleLogin}>
             <label htmlFor="username">Username:</label>
             <input name="username" id="username" type="text" required onChange={(e) => setUsernameValue(e.target.value)} />
             <label htmlFor="password">Password:</label>
             <input name="password" id="password" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
-
             <button type="submit">Log In</button>
+            <Form.Group className="mt-3" controlId="formCheckbox">
+              <Form.Check
+                type="checkbox"
+                label="Admin"
+                checked={checked}
+                onChange={handleCheck}
+              />
+            </Form.Group>
         </form>
-        
     )
 }

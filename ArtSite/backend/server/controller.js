@@ -47,6 +47,19 @@ const handlerFunctions = {
         success: false,
       });
     }
+    if (req.session.adminId) {
+      res.send({
+        message: "Admin is still logged in",
+        success: true,
+        adminId: req.session.adminId,
+      });
+      return;
+    } else {
+      res.send({
+        message: "No admin found",
+        success: false,
+      });
+    }
   },
 
   logIn: async (req, res) => {
@@ -102,23 +115,22 @@ const handlerFunctions = {
     });
   },
 
-  addToCart: {
-    // const user = await User.findOne({
-    //   where: {
-    //     username,
-    //   },
-    //   include: {
-    //     model: Order,
-    //     include: {
-    //       model: Item,
-    //     },
-    //   },
-    // });
-  },
-
   buyItem: {},
 
   //Admin
+
+  adminLogin: async (req, res) => {
+    const { username, password } = req.body;
+    const admin = await Admin.findOne({ where: { username: username } });
+
+    if (admin && admin.password === password) {
+      req.session.adminId = admin.adminId; //This saves their info
+      res.json({ success: true, adminId: req.session.adminId });
+    } else {
+      res.json({ success: false, message: "Invalid User Information" }); // this is the 'response' object, which is received by axios on the front end
+    }
+  },
+
   addItem: (req, res) => {
     const itemName = req.body.itemName;
     const itemPic = req.body.picture;
@@ -137,16 +149,12 @@ const handlerFunctions = {
     });
   },
 
-  deleteItem: (req, res) => {
-    const itemId = req.body.itemId;
+  deleteItem: async (req, res) => {
+    const itemId = req.params.itemId;
+    await Item.destroy({ where: { itemId: itemId } });
 
-    for (let i = 0; i < Item.length; i++) {
-      if (Item[i].id === +itemId) {
-        Item.splice(i, 1);
-        break;
-      }
-    }
-    res.send({ message: "Item deleted", allItems: Item });
+    let items = await Item.findAll();
+    res.send({ message: "Item deleted", allItems: items });
   },
 
   addEpisode: (req, res) => {
@@ -166,6 +174,35 @@ const handlerFunctions = {
   },
 
   addBlogPost: {},
+
+  updateItem: async (req, res) => {
+    const itemId = req.params.itemId;
+    const { picture, itemName, price } = req.body;
+
+    const itemIdx = Item.findIndex((item) => {
+      return item.id === itemId;
+    });
+
+    if (itemIdx !== -1) {
+      const item = Item[itemIdx];
+
+      await item.update({
+        picture: picture ?? item.picture,
+        itemName: itemName ?? item.itemName,
+        price: price ?? item.price,
+      });
+      await item.save();
+
+      res.send({
+        message: "Item details updated",
+        item: item,
+      });
+    } else {
+      res.status(404).send({
+        message: "Item not found",
+      });
+    }
+  },
 };
 
 export default handlerFunctions;

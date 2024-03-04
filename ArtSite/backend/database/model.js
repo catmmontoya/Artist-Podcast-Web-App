@@ -175,6 +175,12 @@ Admin.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    username: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      unique: true,
+      required: true,
+    },
     email: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -222,6 +228,7 @@ User.belongsToMany(Item, { through: "UserItem" });
 Item.belongsToMany(User, { through: "UserItem" });
 
 Comment.belongsTo(User, { foreignKey: "commentId" });
+// Post relationship
 
 User.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(User, { foreignKey: "orderId" });

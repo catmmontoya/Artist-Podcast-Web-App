@@ -1,11 +1,11 @@
-import BlogPost from "../components/admins/BlogPost"
+import BlogPost from "../components/BlogPost"
 import axios from "axios"
 import { useState, useEffect } from "react"
 
 function Blog() {
     const [posts, setPosts] = useState([])
 
-    let blogPosts = async () => {axios.get("/blog")
+    let blogPosts = async () => {axios.get("/api/blog")
     .then((res) => {
         setPosts(res.data)
     })

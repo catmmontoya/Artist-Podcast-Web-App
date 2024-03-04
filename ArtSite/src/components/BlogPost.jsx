@@ -1,7 +1,7 @@
 function BlogPost({ post }) {
   return (
     <div className="ep-card">
-      <p>{post.postName}</p>
+      <h2>{post.postName}</h2>
       <p>{post.postText}</p>
     </div>
   )

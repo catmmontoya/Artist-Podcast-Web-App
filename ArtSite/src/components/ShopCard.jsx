@@ -3,19 +3,17 @@ import { useSelector } from "react-redux"
 
 function Card({ item }) {
   const navigate = useNavigate();
+  // const dispatch = useDispatch()
   const userId = useSelector(state => state.userId);
-
 
   const handleClick = async () => {
     if (userId) {
-      // await axios.post("/cart")
       navigate("/cart")
     } else {
       navigate("/signup")
     }
   }
 
-  console.log(item)
   return (
       <div className="shop-card">
         <img className="card-img" src={item.picture} />

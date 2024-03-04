@@ -2,8 +2,8 @@ function Episode({ episode }) {
 
   return (
 <>
-    <div>
-      <p>{episode.episodeName}</p>
+    <div className="ep-card">
+      <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
     </div>
     </>

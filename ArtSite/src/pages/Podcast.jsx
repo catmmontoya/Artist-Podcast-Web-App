@@ -1,4 +1,4 @@
-import Episode from "../components/admins/Episode"
+import Episode from "../components/Episode"
 import axios from "axios"
 import { useState, useEffect } from "react"
 
@@ -6,7 +6,7 @@ export default function Podcast() {
     const [episodes, setEpisodes] = useState([])
 
     let epCards = async () => {
-        await axios.get("/podcast")
+        await axios.get("/api/podcast")
             .then((res) => {
                 setEpisodes(res.data)
             })

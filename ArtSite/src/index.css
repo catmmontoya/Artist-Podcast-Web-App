@@ -101,10 +101,23 @@ img.card-img {
   border: 1px solid gray;
   margin: 1em;
   padding: 2em;
+  display: center;
+  text-align: unset;
+  max-width: 1000px;
+  min-width: 600px;
+  min-height: 250px;
+}
+
+shop-card {
+  border-radius: 10px;
+  border: 1px solid gray;
+  margin: 1em;
+  padding: 2em;
   display: inline-block;
   text-align: unset;
-  min-width: 1200px;
-  min-height: 250px;
+  cursor: pointer;
+  min-width: 270px;
+  min-height: 450px;
 }
 
 @media (prefers-color-scheme: light) {

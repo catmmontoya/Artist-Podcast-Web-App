@@ -136,8 +136,9 @@ for (const order of orders) {
 
 let admins = [
   {
+    username: "catmmm",
     email: "catmm@gmail.com",
-    password: "greenismyfav",
+    password: "green",
   },
 ];
 
