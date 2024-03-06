@@ -179,23 +179,22 @@ const handlerFunctions = {
     const itemId = req.params.itemId;
     const { picture, itemName, price } = req.body;
 
-    const itemIdx = Item.findIndex((item) => {
-      return item.id === itemId;
-    });
+    const item = await Item.findByPk(itemId);
 
-    if (itemIdx !== -1) {
-      const item = Item[itemIdx];
-
+    if (item) {
       await item.update({
         picture: picture ?? item.picture,
         itemName: itemName ?? item.itemName,
         price: price ?? item.price,
       });
+
       await item.save();
+
+      const allItems = await Item.findAll();
 
       res.send({
         message: "Item details updated",
-        item: item,
+        allItems: allItems,
       });
     } else {
       res.status(404).send({

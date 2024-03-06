@@ -2,8 +2,13 @@ const initialState = {
   userId: null,
   adminId: null,
   otherValue: "Hello",
-  cart: [],
+  cartItems: [],
 };
+
+// const addToCart = (item) => ({
+//   type: "ADD_TO_CART",
+//   payload: item,
+// });
 
 //front end components will dispatch an action object
 const reducer = (state = initialState, action) => {
@@ -26,18 +31,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         userId: null,
         adminId: null,
+        cartItems: [],
       };
 
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: action.payload,
+        cartItems: [...state.cartItems, action.payload],
       };
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: action.payload,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
       };
 
     case "ADMIN_AUTH":

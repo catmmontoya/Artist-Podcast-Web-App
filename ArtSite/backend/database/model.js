@@ -228,7 +228,9 @@ User.belongsToMany(Item, { through: "UserItem" });
 Item.belongsToMany(User, { through: "UserItem" });
 
 Comment.belongsTo(User, { foreignKey: "commentId" });
-// Post relationship
+User.hasMany(Comment, { foreignKey: "commentId" });
+Comment.belongsTo(Post, { foreignKey: "commentId" });
+Post.hasMany(Comment, { foreignKey: "commentId" });
 
 User.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(User, { foreignKey: "orderId" });

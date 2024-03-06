@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 function Card({ item }) {
   const navigate = useNavigate();
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const userId = useSelector(state => state.userId);
 
   const handleClick = async () => {
     if (userId) {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: item
+      })
       navigate("/cart")
     } else {
       navigate("/signup")

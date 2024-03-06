@@ -4,14 +4,14 @@ import { useState } from "react"
 function AdminCard({ item, setItems }) {
 
   const [picture, setPicture] = useState(item.picture)
-  const [itemName, setItemName] = (item.itemName)
+  const [itemName, setItemName] = useState(item.itemName)
   const [price, setPrice] = useState(item.price)
 
   const [isEditing, setIsEditing] = useState(false)
 
   const editMode = () => setIsEditing(true)
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const bodyObj = {
         picture,
         itemName,
@@ -19,13 +19,14 @@ function AdminCard({ item, setItems }) {
     };
     axios.put(`/api/update/${item.itemId}`, bodyObj)
     .then((res) => {
-        setIsEditing(false)
-        message: "Success",
-        res.data.message
+        console.log("Success",
+        res.data.message);
+        setIsEditing(false);
+        setItems(res.data.allItems)
     })
-    // .catch((err) => {
-    //     notify("danger", err.res.data.message)
-    // })
+    .catch((error) => {
+        console.log("Error", error)
+    })
 }
 
 const handleCancel = () => {
@@ -42,13 +43,16 @@ const handleCancel = () => {
     })
   }
 
+  // useEffect(() => {}, [])
 
   return isEditing ? (
+    <table>
       <tr className="shop-card">
           <td>{item.itemId}</td>
           <td>
               <input
               type="text"
+              placeholder="Picture"
               value={picture}
               onChange={(e) => setPicture(e.target.value)}
               />
@@ -56,6 +60,7 @@ const handleCancel = () => {
           <td>
           <input
             type="text"
+            placeholder="Name"
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
           />
@@ -64,13 +69,19 @@ const handleCancel = () => {
         <td>
           <input
             type="text"
+            placeholder="Price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
         </td>
-      <button onClick={handleSave} className="btn-img">Save</button> 
+        <td>
+      <button onClick={handleSave} className="img-btn">Save</button>
+      <button onClick={handleCancel} className="img-btn" >Cancel</button> 
+     </td>
       </tr>
+      </table>
     ) : (
+      <table>
       <tr className="shop-card">
       <td>{item.itemId}</td>
       <td>
@@ -78,9 +89,12 @@ const handleCancel = () => {
       </td>
       <td className="img-name">{item.itemName}</td>
       <td className="img-price">{item.price}</td>
+      <td>
       <button onClick={handleDelete} className="img-btn">Delete</button>
       <button onClick={editMode}>Edit</button>
+      </td>
       </tr>
+      </table>
     )
   }
 

@@ -1,15 +1,14 @@
 import Card from "../components/ShopCard"
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 import AdminCard from "../admins/AdminCard"
 
 export default function Home() {
     const [items, setItems] = useState([])
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch()
     const adminId = useSelector(state => state.adminId)
 
 let cards = async () => {axios.get("/api/items")
@@ -19,14 +18,6 @@ let cards = async () => {axios.get("/api/items")
 }
 
 useEffect(() => {cards()}, [])
-
-
-const handleCancel = () => {
-    setPicture(item.picture);
-    setItemName(item.itemName);
-    setPrice(item.price)
-    setIsEditing(false)
-}
 
 const myContent = items.map((item) => {
     if(!adminId) {
