@@ -168,17 +168,17 @@ for (const post of posts) {
   await Post.create(post);
 }
 
-// let comments = [
-//   {
-//     input: "this is fine.",
-//   },
-// ];
+let comments = [
+  {
+    input: "this is fine.",
+  },
+];
 
-// await Comment.create({
-//   input: "this is fine.",
-//   userId: 1,
-//   postId: 1,
-// });
+await Comment.create({
+  input: "this is fine.",
+  userId: 1,
+  postId: 1,
+});
 
 // let cartItems = [
 //   {}

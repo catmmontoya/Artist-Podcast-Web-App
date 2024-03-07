@@ -1,33 +1,40 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
 
 function BlogPost({ post, comment, user }) {
   const userId = useSelector((state) => state.userId)
-  const dispatch = useDispatch()
   const [newComment, setNewComment] = useState("")
+  const [isCommenting, setIsCommenting] = useState(false)
+  const [localPost, setLocalPost] = useState(post)
 
-  const comments = post.comments.map((comment, index) => {
+  const commentMode = () => setIsCommenting(true)
+
+  const comments = localPost.comments.map((comment) => {
     return (
       <>
-    <li key={index}>{comment.input}</li>
-    <li>Left by user: {comment.user.username}</li>
+    <li className="comment" key={comment.commentId}>{comment.input}</li>
+    <p className="by-user">Left by user: {comment.user.username}</p>
       </>
     )
   })
 
-  const handleSubmit = async () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const bodyObj = {
-      input: newComment,
+      postId: post.postId,
+      user: userId,
+      comment: newComment,
     }
 
+    console.log(bodyObj)
     axios.post("/api/addComment", bodyObj) 
       .then((res) => {
-        setNewComment("")
+        setIsCommenting(false)
+        setLocalPost(res.data)
       })
     }
   
-
   return (
     <>
     <div className="ep-card">
@@ -36,16 +43,19 @@ function BlogPost({ post, comment, user }) {
     </div>
     <ul className="comments">{comments}</ul>
     {userId &&
+    <button onClick={commentMode} method="POST" className="img-btn">Add Comment</button>
+    }
+    {isCommenting && 
     <>
-    <input 
+      <input 
     placeholder="Comment here"
     value={newComment}
     onChange={(e) => setNewComment(e.target.value)}
     />
-    <button onClick={handleSubmit} className="img-btn">Add Comment</button>
+    <button onClick={handleSubmit}>Submit</button>
     </>
-    }
-    </>       
+}
+    </>     
   )
 }
 

@@ -129,18 +129,62 @@ const handlerFunctions = {
     });
   },
 
-  addComment: (req, res) => {
-    const postId = req.params.postId;
-    const { user, comment } = req.body;
+  addComment: async (req, res) => {
+    const { user, comment, postId } = req.body;
 
-    const post = Post.find((post) => post.postId === postId);
+    const post = await Post.findByPk(postId);
+    // find((post) => post.postId === postId);
 
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
-    post.comments.pust({ user, comment });
 
-    res.json(post);
+    // create a comment linked to the post and the user
+    const newComment = await post.createComment({
+      userId: user,
+      input: comment,
+    });
+
+    // Now, re-query for the selected Post object, eager loaded with all its comments
+    const updatedPost = await Post.findByPk(postId, {
+      include: {
+        model: Comment,
+        include: {
+          model: User,
+        },
+      },
+    });
+
+    res.send(updatedPost);
+  },
+
+  addEpisodeComment: async (req, res) => {
+    const { user, comment, episodeId } = req.body;
+
+    const episode = await Episode.findByPk(episodeId);
+    // find((post) => post.postId === postId);
+
+    if (!episode) {
+      return res.status(404).json({ error: "Episode not found" });
+    }
+
+    // create a comment linked to the post and the user
+    const newComment = await episode.createComment({
+      userId: user,
+      input: comment,
+    });
+
+    // Now, re-query for the selected Post object, eager loaded with all its comments
+    const updatedEpisode = await Episode.findByPk(episodeId, {
+      include: {
+        model: Comment,
+        include: {
+          model: User,
+        },
+      },
+    });
+
+    res.send(updatedEpisode);
   },
 
   buyItem: {},

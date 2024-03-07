@@ -1,16 +1,38 @@
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import axios from "axios"
 
 function Episode({ episode }) {
 const userId = useSelector((state) => state.userId)
+const [newComment, setNewComment] = useState("")
+const [isCommenting, setIsCommenting] = useState(false)
+const [localEpisode, setLocalEpisode] = useState(episode)
 
-const comments = episode.comments.map((comment) => {
+const commentMode = () => setIsCommenting(true)
+
+const comments = localEpisode.comments.map((comment) => {
   return (
     <>
-  <li>{comment.input}</li>
-  <li>Left by user: {comment.user.username}</li>
+  <li className="comment">{comment.input}</li>
+  <p className="by-user">Left by user: {comment.user.username}</p>
     </>
   )
 })
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const bodyObj = {
+    episodeId: episode.episodeId,
+    user: userId,
+    comment: newComment,
+  }
+
+  axios.post("/api/addEpisodeComment", bodyObj) 
+    .then((res) => {
+      setIsCommenting(false)
+      setLocalEpisode(res.data)
+    })
+  }
 
   return (
 <>
@@ -18,10 +40,20 @@ const comments = episode.comments.map((comment) => {
       <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
     </div>
-    <ul className="comments">{comments}</ul>
-    {userId &&
-    <button className="img-btn">Add Comment</button>
-}   
+    <ul className="comments">{comments}</ul> 
+{userId &&
+    <button onClick={commentMode} method="POST" className="img-btn">Add Comment</button>
+    }
+    {isCommenting && 
+    <>
+      <input 
+    placeholder="Comment here"
+    value={newComment}
+    onChange={(e) => setNewComment(e.target.value)}
+    />
+    <button onClick={handleSubmit}>Submit</button>
+    </>
+}
     </>
   )
 }

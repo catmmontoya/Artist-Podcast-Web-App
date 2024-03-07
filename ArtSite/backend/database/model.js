@@ -232,15 +232,15 @@ User.hasMany(Comment, { foreignKey: "userId" });
 Comment.belongsTo(Post, { foreignKey: "postId" });
 Post.hasMany(Comment, { foreignKey: "postId" });
 
-User.hasMany(Order, { foreignKey: "orderId" });
-Order.belongsTo(User, { foreignKey: "orderId" });
-Item.hasMany(Order, { foreignKey: "orderId" });
-Order.belongsTo(Item, { foreignKey: "orderId" });
+User.hasMany(Order, { foreignKey: "userId" });
+Order.belongsTo(User, { foreignKey: "userId" });
+Item.hasMany(Order, { foreignKey: "itemId" });
+Order.belongsTo(Item, { foreignKey: "itemId" });
 
-Comment.belongsTo(User, { foreignKey: "commentId" });
-User.hasMany(Comment, { foreignKey: "commentId" });
-Comment.belongsTo(Episode, { foreignKey: "commentId" });
-Episode.hasMany(Comment, { foreignKey: "commentId" });
+Comment.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Comment, { foreignKey: "userId" });
+Comment.belongsTo(Episode, { foreignKey: "episodeId" });
+Episode.hasMany(Comment, { foreignKey: "episodeId" });
 
 // userObj.addItem(itemObj)
 // itemObj.addUser(userObj)
