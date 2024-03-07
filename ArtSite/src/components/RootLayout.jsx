@@ -2,8 +2,6 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 
-//add logic here for if user or admin is logged in
-
 function RootLayout() {
 const userId = useSelector((state) => state.userId)
 const adminId = useSelector((state) => state.adminId)
@@ -39,7 +37,7 @@ const buttonClick = async () => {
           <NavLink to="/">home</NavLink>
           <NavLink to="/blog">blog</NavLink>
           <NavLink to="/podcast">podcast</NavLink>
-          {!userId && 
+          {!userId && !adminId &&
           <button className="nav-btn">
               <NavLink to={"/login"}>Log In</NavLink>
             </button>

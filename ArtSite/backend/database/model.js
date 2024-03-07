@@ -227,10 +227,10 @@ Comment.init(
 User.belongsToMany(Item, { through: "UserItem" });
 Item.belongsToMany(User, { through: "UserItem" });
 
-Comment.belongsTo(User, { foreignKey: "commentId" });
-User.hasMany(Comment, { foreignKey: "commentId" });
-Comment.belongsTo(Post, { foreignKey: "commentId" });
-Post.hasMany(Comment, { foreignKey: "commentId" });
+Comment.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Comment, { foreignKey: "userId" });
+Comment.belongsTo(Post, { foreignKey: "postId" });
+Post.hasMany(Comment, { foreignKey: "postId" });
 
 User.hasMany(Order, { foreignKey: "orderId" });
 Order.belongsTo(User, { foreignKey: "orderId" });

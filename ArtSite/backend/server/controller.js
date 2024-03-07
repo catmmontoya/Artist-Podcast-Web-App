@@ -23,12 +23,26 @@ const handlerFunctions = {
   },
 
   getAllEpisodes: async (req, res) => {
-    const allEpisodes = await Episode.findAll();
+    const allEpisodes = await Episode.findAll({
+      include: {
+        model: Comment,
+        include: {
+          model: User,
+        },
+      },
+    });
     res.send(allEpisodes);
   },
 
   getAllBlogPosts: async (req, res) => {
-    const allBlogPosts = await Post.findAll();
+    const allBlogPosts = await Post.findAll({
+      include: {
+        model: Comment,
+        include: {
+          model: User,
+        },
+      },
+    });
     res.send(allBlogPosts);
   },
 
@@ -113,6 +127,20 @@ const handlerFunctions = {
       userId: user.userId,
       user: user,
     });
+  },
+
+  addComment: (req, res) => {
+    const postId = req.params.postId;
+    const { user, comment } = req.body;
+
+    const post = Post.find((post) => post.postId === postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    post.comments.pust({ user, comment });
+
+    res.json(post);
   },
 
   buyItem: {},
