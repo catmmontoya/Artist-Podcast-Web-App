@@ -6,17 +6,20 @@ import AdminCard from "../admins/AdminCard"
 
 export default function Home() {
     const [items, setItems] = useState([])
+    const [picture, setPicture] = useState([])
+    const [itemName, setItemName] = useState([])
+    const [price, setPrice] = useState([])
     const adminId = useSelector(state => state.adminId)
 
     const [isEditing, setIsEditing] = useState(false)
+
+    const editMode = () => setIsEditing(true)
 
 let cards = async () => {axios.get("/api/items")
 .then((res) => {
     setItems(res.data)
 })
 }
-
-useEffect(() => {cards()}, [])
 
 const myContent = items.map((item) => {
     if(!adminId) {
@@ -26,16 +29,47 @@ const myContent = items.map((item) => {
     }
 })
 
+const handleSave = async () => {
+    const bodyObj = {
+        picture,
+        itemName,
+        price
+    }
+
+    await axios.post("/api/addItem", bodyObj) 
+    .then((res) => {
+        cards()
+        setIsEditing(false)
+    })
+}
+
+const handleCancel = () => {
+    setPicture(picture);
+    setItemName(itemName);
+    setPrice(price)
+    setIsEditing(false)
+  }
+
+  useEffect(() => {cards()}, [])
+
 return (
 <>
     <div>
         <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
     </div>
     {adminId && 
-            <button>Add Shop Item</button>
+            <button onClick={editMode}>Add Shop Item</button>
             }
-            {/* {isEditing &&} */}
-    {myContent}
+        {isEditing &&
+            <>
+            <input value={picture} placeholder="Pic here" onChange={(e) => setPicture(e.target.value)} /> 
+            <input value={itemName} placeholder="Name" onChange={(e) => setItemName(e.target.value)} />
+            <input value={price} placeholder="Price" onChange={(e) => setPrice(e.target.value)} />
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
+            </>
+            }  
+             {myContent}
     </>
 )
 }

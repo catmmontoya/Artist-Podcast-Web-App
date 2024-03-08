@@ -18,7 +18,9 @@ import {
 
 const handlerFunctions = {
   getAllItems: async (req, res) => {
-    const allItems = await Item.findAll();
+    const allItems = await Item.findAll({
+      order: [["item_id", "DESC"]],
+    });
     res.send(allItems);
   },
 
@@ -30,6 +32,7 @@ const handlerFunctions = {
           model: User,
         },
       },
+      order: [["episode_id", "DESC"]],
     });
     res.send(allEpisodes);
   },
@@ -42,6 +45,7 @@ const handlerFunctions = {
           model: User,
         },
       },
+      order: [["post_id", "DESC"]],
     });
     res.send(allBlogPosts);
   },
@@ -112,13 +116,6 @@ const handlerFunctions = {
       password,
       email,
     });
-
-    // if (req.session.adminId) {
-    //   res.status(200).send({
-    //     message: "New user created successfully",
-    //   });
-    //   return;
-    // }
 
     req.session.userId = user.userId;
 
@@ -213,10 +210,10 @@ const handlerFunctions = {
       price: itemPrice,
     };
 
-    Item.push(newItem);
+    Item.create(newItem);
     res.send({
       message: "Here's your new item",
-      allItems: Item,
+      newItem: newItem,
     });
   },
 
@@ -237,10 +234,10 @@ const handlerFunctions = {
       episodeDescription: epDescription,
     };
 
-    Episode.push(newEpisode);
+    Episode.create(newEpisode);
     res.send({
       message: "Here's a new podcast episode!",
-      allEpisodes: Episode,
+      newEpisode: newEpisode,
     });
   },
 
@@ -253,10 +250,10 @@ const handlerFunctions = {
       postText: pText,
     };
 
-    Post.push(newPost);
+    Post.create(newPost);
     res.send({
       message: "Here's a new post!",
-      allBlogPosts: Post,
+      newPost: newPost,
     });
   },
 
@@ -286,6 +283,22 @@ const handlerFunctions = {
         message: "Item not found",
       });
     }
+  },
+
+  deleteEpisode: async (req, res) => {
+    const episodeId = req.params.episodeId;
+    await Episode.destroy({ where: { episodeId: episodeId } });
+
+    let episodes = await Episode.findAll();
+    res.send({ message: "Episode deleted", allEpisodes: episodes });
+  },
+
+  deletePost: async (req, res) => {
+    const postId = req.params.postId;
+    await Post.destroy({ where: { postId: postId } });
+
+    let posts = await Post.findAll();
+    res.send({ message: "Post deleted", allBlogPosts: posts });
   },
 };
 

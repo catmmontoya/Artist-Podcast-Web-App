@@ -36,14 +36,11 @@ const handleCancel = () => {
   setIsEditing(false)
 }
 
-  //const handleDelete to delete an item
   const handleDelete = async () => {axios.delete(`/api/delete/${item.itemId}`)
     .then((res) => {
       setItems(res.data.allItems)
     })
   }
-
-  // useEffect(() => {}, [])
 
   return isEditing ? (
     <table>

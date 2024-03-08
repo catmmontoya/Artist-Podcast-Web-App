@@ -34,12 +34,19 @@ const handleSubmit = (e) => {
     })
   }
 
+  const handleDelete = async () => {axios.delete(`/api/delete/${post.postId}`)
+  .then((res) => {
+    setPosts(res.data.allBlogPosts)
+  })
+}
+
   return (
 <>
     <div className="ep-card">
       <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
     </div>
+    <button onClick={handleDelete}>Delete</button>
     <p>Comments:</p>
     <ul className="comments">{comments}</ul> 
 {userId &&

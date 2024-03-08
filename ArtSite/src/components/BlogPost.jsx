@@ -2,8 +2,10 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
 
-function BlogPost({ post, comment, user }) {
+function BlogPost({ post, setPosts }) {
   const userId = useSelector((state) => state.userId)
+  const adminId = useSelector((state) => state.adminId)
+
   const [newComment, setNewComment] = useState("")
   const [isCommenting, setIsCommenting] = useState(false)
   const [localPost, setLocalPost] = useState(post)
@@ -27,13 +29,19 @@ function BlogPost({ post, comment, user }) {
       comment: newComment,
     }
 
-    console.log(bodyObj)
     axios.post("/api/addComment", bodyObj) 
       .then((res) => {
         setIsCommenting(false)
         setLocalPost(res.data)
       })
     }
+
+    const handleDelete = async () => {
+      axios.delete(`/api/post/delete/${post.postId}`)
+      .then((res) => {
+        setPosts(res.data.allBlogPosts)
+      })
+  }
   
   return (
     <>
@@ -41,6 +49,9 @@ function BlogPost({ post, comment, user }) {
       <h2>{post.postName}</h2>
       <p>{post.postText}</p>
     </div>
+    {adminId && 
+          <button onClick={handleDelete} className="img-btn">Delete</button>
+        }
     <p>Comments:</p>
     <ul className="comments">{comments}</ul>
     {userId &&

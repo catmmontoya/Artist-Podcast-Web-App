@@ -34,6 +34,8 @@ app.post("/api/login/admin", handlerFunctions.adminLogin);
 app.put("/api/update/:itemId", handlerFunctions.updateItem);
 app.post("/api/addComment", handlerFunctions.addComment);
 app.post("/api/addEpisodeComment", handlerFunctions.addEpisodeComment);
+app.delete("/api/post/delete/:postId", handlerFunctions.deletePost);
+app.delete("/api/episode/delete/:episodeId", handlerFunctions.deleteEpisode);
 
 //Run the server
 ViteExpress.listen(app, 8000, () =>

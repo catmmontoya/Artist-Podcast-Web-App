@@ -24,16 +24,23 @@ function Blog() {
         postName,
         postText
       }
-      
-      await axios.post("/api/addPost", bodyObj);
-      setPosts(res.data)
+    
+      await axios.post("/api/addPost", bodyObj)
+      .then((res) => {
+      blogPosts()
       setIsEditing(false)
-      blogPosts();
+      })
+    }
+
+    const handleCancel = () => {
+      setPostName(postName)
+      setPostText(postText)
+      setIsEditing(false)
     }
 
     useEffect(() => {blogPosts()}, [])
     
-    const myPosts = posts.map((post) => <BlogPost post={post} key={post.postId} />)
+    const myPosts = posts.map((post) => <BlogPost setPosts={setPosts} post={post} key={post.postId} />)
 
   return (
     <div>
@@ -43,9 +50,10 @@ function Blog() {
             }
             {isEditing &&
             <>
-            <input value={postName} onChange={(e) => setPostName(e.target.value)} /> 
-            <textarea value={postText} onChange={(e) => setPostText(e.target.value)} />
+            <input value={postName} placeholder="Name" onChange={(e) => setPostName(e.target.value)} /> 
+            <textarea value={postText} placeholder="Speak your thoughts, girl" onChange={(e) => setPostText(e.target.value)} />
             <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
             </>
             }
             {myPosts}
