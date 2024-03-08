@@ -190,7 +190,6 @@ const handlerFunctions = {
   buyItem: {},
 
   //Admin
-
   adminLogin: async (req, res) => {
     const { username, password } = req.body;
     const admin = await Admin.findOne({ where: { username: username } });
@@ -245,7 +244,21 @@ const handlerFunctions = {
     });
   },
 
-  addBlogPost: {},
+  addBlogPost: (req, res) => {
+    const pName = req.body.postName;
+    const pText = req.body.postText;
+
+    const newPost = {
+      postName: pName,
+      postText: pText,
+    };
+
+    Post.push(newPost);
+    res.send({
+      message: "Here's a new post!",
+      allBlogPosts: Post,
+    });
+  },
 
   updateItem: async (req, res) => {
     const itemId = req.params.itemId;

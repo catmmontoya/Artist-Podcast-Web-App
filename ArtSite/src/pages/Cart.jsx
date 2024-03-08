@@ -7,7 +7,6 @@ const removeFromCart = (itemId) => ({
 });
 
 function Cart() {
-// const dispatch = useDispatch()
 const cart = useSelector(state => state.cartItems);
 
 //import Card and use select to grab cart and map over cart and create Card for each item

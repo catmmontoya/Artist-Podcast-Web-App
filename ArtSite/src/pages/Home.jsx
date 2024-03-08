@@ -6,10 +6,9 @@ import AdminCard from "../admins/AdminCard"
 
 export default function Home() {
     const [items, setItems] = useState([])
-
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch()
     const adminId = useSelector(state => state.adminId)
+
+    const [isEditing, setIsEditing] = useState(false)
 
 let cards = async () => {axios.get("/api/items")
 .then((res) => {
@@ -27,12 +26,15 @@ const myContent = items.map((item) => {
     }
 })
 
-
 return (
 <>
     <div>
         <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
     </div>
+    {adminId && 
+            <button>Add Shop Item</button>
+            }
+            {/* {isEditing &&} */}
     {myContent}
     </>
 )

@@ -40,6 +40,7 @@ const handleSubmit = (e) => {
       <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
     </div>
+    <p>Comments:</p>
     <ul className="comments">{comments}</ul> 
 {userId &&
     <button onClick={commentMode} method="POST" className="img-btn">Add Comment</button>

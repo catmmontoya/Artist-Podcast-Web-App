@@ -41,6 +41,7 @@ function BlogPost({ post, comment, user }) {
       <h2>{post.postName}</h2>
       <p>{post.postText}</p>
     </div>
+    <p>Comments:</p>
     <ul className="comments">{comments}</ul>
     {userId &&
     <button onClick={commentMode} method="POST" className="img-btn">Add Comment</button>

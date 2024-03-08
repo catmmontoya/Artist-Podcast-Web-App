@@ -128,13 +128,19 @@ shop-card {
   display: center;
   text-align: unset;
   max-width: 1000px;
-  min-width: 600px;
-  min-height: 50px;
+  min-height: 30px;
+  overflow-wrap: break-word;
+  padding-top: 30px;
+  padding-bottom: 20px
 }
 
 .comment {
   font-size:14px;
 }
+/* 
+.commentName {
+  margin-bottom: 10px 10px
+} */
 
 .by-user {
   font-size: 12px;

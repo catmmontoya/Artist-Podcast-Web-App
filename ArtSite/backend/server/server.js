@@ -22,6 +22,8 @@ app.use(
 app.get("/api/items", handlerFunctions.getAllItems);
 app.post("/api/login", handlerFunctions.logIn);
 app.post("/api/addItem", handlerFunctions.addItem);
+app.post("/api/addEpisode", handlerFunctions.addEpisode);
+app.post("/api/addPost", handlerFunctions.addBlogPost);
 app.delete("/api/delete/:itemId", handlerFunctions.deleteItem);
 app.get("/api/logout", handlerFunctions.logOut);
 app.get("/api/session-check", handlerFunctions.sessionCheck);
