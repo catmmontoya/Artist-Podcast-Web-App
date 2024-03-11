@@ -53,7 +53,7 @@ Item.init(
       autoIncrement: true,
     },
     picture: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     itemName: {
       type: DataTypes.STRING(100),

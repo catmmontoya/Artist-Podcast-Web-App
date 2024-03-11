@@ -43,11 +43,15 @@ export default function LoginForm() {
         // = axios.post("endpoint/as/a/string", req.body)
         .then((res) => { // 'res' is our variable that receives the response object from the server
             console.log(res.data) // res.data is exactly what you are sending back from the server
-            dispatch({
-                type: "USER_AUTH",
-                payload: res.data.userId
-            })
-            navigate("/")
+            if (res.data.success) {
+                dispatch({
+                    type: "USER_AUTH",
+                    payload: res.data.userId
+                })
+                navigate("/")
+            } else {
+                alert(res.data.message)
+            }
         })
         // .catch((error) => {
         //     console.error("error", error.res.data.message)
@@ -65,7 +69,7 @@ useEffect(() => {}, [])
             <input name="username" id="username" type="text" required onChange={(e) => setUsernameValue(e.target.value)} />
             <label htmlFor="password">Password:</label>
             <input name="password" id="password" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
-            <button type="submit">Log In</button>
+            <button className="img-btn" type="submit">Log In</button>
             <Form.Group className="mt-3" controlId="formCheckbox">
               <Form.Check
                 type="checkbox"

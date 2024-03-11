@@ -79,16 +79,16 @@ const handleCancel = () => {
       </table>
     ) : (
       <table>
-      <tr className="shop-card">
+      <tr className="admin-card">
       <td>{item.itemId}</td>
       <td>
       <img className="card-img" src={item.picture} />
       </td>
       <td className="img-name">{item.itemName}</td>
       <td className="img-price">{item.price}</td>
-      <td>
+      <td className="btn-space">
       <button onClick={handleDelete} className="img-btn">Delete</button>
-      <button onClick={editMode}>Edit</button>
+      <button onClick={editMode} className="img-btn">Edit</button>
       </td>
       </tr>
       </table>

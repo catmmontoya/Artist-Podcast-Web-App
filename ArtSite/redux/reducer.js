@@ -41,9 +41,12 @@ const reducer = (state = initialState, action) => {
       };
 
     case "REMOVE_FROM_CART":
+      console.log("hit reducer remove cart");
       return {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+        cartItems: state.cartItems.filter(
+          (item) => item.itemId !== action.payload
+        ),
       };
 
     case "ADMIN_AUTH":

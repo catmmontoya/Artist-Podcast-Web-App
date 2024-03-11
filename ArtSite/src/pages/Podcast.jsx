@@ -40,20 +40,20 @@ export default function Podcast() {
     
     useEffect(() => {epCards()}, [])
     
-    const myEpisodes = episodes.map((episode) => <Episode episode={episode} key={episode.episodeId} />)
+    const myEpisodes = episodes.map((episode) => <Episode episode={episode} setEpisodes={setEpisodes} key={episode.episodeId} />)
 
     return (
         <div>
             <h4>Here's what I've been working and whose art I've been loving. Please respect the work creatives we have put out into the world!</h4>
             {adminId && 
-            <button onClick={editMode}>Add Episode</button>
+            <button className="img-btn" onClick={editMode}>Add Episode</button>
             }
              {isEditing &&
             <>
             <input value={episodeName} placeholder="Name" onChange={(e) => setEpisodeName(e.target.value)} /> 
             <textarea value={episodeDescription} placeholder="New Episode" onChange={(e) => setEpisodeDescription(e.target.value)} />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button className="img-btn" onClick={handleSave}>Save</button>
+            <button className="img-btn" onClick={handleCancel}>Cancel</button>
             </>
             }
             {myEpisodes}

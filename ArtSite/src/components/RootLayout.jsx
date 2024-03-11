@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react";
 import axios from "axios"
 
 function RootLayout() {
@@ -8,6 +9,27 @@ const adminId = useSelector((state) => state.adminId)
 
 const dispatch = useDispatch()
 const navigate = useNavigate()
+
+// function to call server to know if the browser still contains 
+// the userId/adminId in the req.session cookie
+const sessionCheck = async () => {
+  axios.get(`/api/session-check`)
+  .then(res => {
+    // if a user/admin is logged in, need to dispatch 
+    // their ID to the redux store
+    if (res.data.userId) {
+      dispatch({
+        type: "USER_AUTH",
+        payload: res.data.userId
+      })
+    } else if (res.data.adminId) {
+      dispatch({
+        type: "ADMIN_AUTH",
+        payload: res.data.adminId
+      })
+    }
+  })
+}
 
 const handleLogout = async () => {
   const res = await axios.get("/api/logout")
@@ -27,6 +49,15 @@ const buttonClick = async () => {
   } else 
     navigate("/signup")
   }
+
+  // useEffect(callback, [dependencyArray])
+  // if dependencyArray is empty, the callback only runs when this
+  // componenent is 'initially rendered' and not on re-renders
+  // if you include something in the dependencyArray, the callback
+  // will run every time that something is modified
+  useEffect(() => {
+    sessionCheck()
+  }, [])
 
   return (
     <>
@@ -53,7 +84,7 @@ const buttonClick = async () => {
               </>
             }
             {adminId && 
-            <button onClick={handleLogout} className="nav-btn">Log Out
+            <button onClick={handleLogout}>Log Out
           </button>
             }
         </nav>

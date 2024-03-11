@@ -2,8 +2,10 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
 
-function Episode({ episode }) {
+function Episode({ episode, setEpisodes }) {
 const userId = useSelector((state) => state.userId)
+const adminId = useSelector((state) => state.adminId)
+
 const [newComment, setNewComment] = useState("")
 const [isCommenting, setIsCommenting] = useState(false)
 const [localEpisode, setLocalEpisode] = useState(episode)
@@ -34,9 +36,9 @@ const handleSubmit = (e) => {
     })
   }
 
-  const handleDelete = async () => {axios.delete(`/api/delete/${post.postId}`)
+  const handleDelete = async () => {axios.delete(`/api/episode/delete/${episode.episodeId}`)
   .then((res) => {
-    setPosts(res.data.allBlogPosts)
+    setEpisodes(res.data.allEpisodes)
   })
 }
 
@@ -46,7 +48,9 @@ const handleSubmit = (e) => {
       <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
     </div>
-    <button onClick={handleDelete}>Delete</button>
+    {adminId &&
+    <button className="img-btn" onClick={handleDelete}>Delete</button>
+}
     <p>Comments:</p>
     <ul className="comments">{comments}</ul> 
 {userId &&

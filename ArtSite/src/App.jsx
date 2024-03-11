@@ -29,12 +29,12 @@ import Cart from './pages/Cart'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-    <Route index element={<Home />} />
-    <Route path="blog" element={<Blog />} />
-    <Route path="podcast" element={<Podcast />} />
-    <Route path="login" element={<LoginForm />} />
-    <Route path="signup" element={<SignupForm />} />
-    <Route path="cart" element={<Cart />} />
+      <Route index element={<Home />} />
+      <Route path="blog" element={<Blog />} />
+      <Route path="podcast" element={<Podcast />} />
+      <Route path="login" element={<LoginForm />} />
+      <Route path="signup" element={<SignupForm />} />
+      <Route path="cart" element={<Cart />} />
 
     {/* <input
     type='text'

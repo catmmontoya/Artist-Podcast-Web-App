@@ -57,15 +57,10 @@ const handlerFunctions = {
         message: "User is still logged in",
         success: true,
         userId: req.session.userId,
+        cart: req.session.cart,
       });
       return;
-    } else {
-      res.send({
-        message: "No user found",
-        success: false,
-      });
-    }
-    if (req.session.adminId) {
+    } else if (req.session.adminId) {
       res.send({
         message: "Admin is still logged in",
         success: true,
@@ -74,7 +69,7 @@ const handlerFunctions = {
       return;
     } else {
       res.send({
-        message: "No admin found",
+        message: "No user or admin found",
         success: false,
       });
     }
@@ -86,6 +81,7 @@ const handlerFunctions = {
 
     if (user && user.password === password) {
       req.session.userId = user.userId; //This saves their info
+      req.session.cart = [];
       res.json({ success: true, userId: req.session.userId });
     } else {
       res.json({ success: false, message: "Invalid User Information" }); // this is the 'response' object, which is received by axios on the front end
@@ -221,7 +217,9 @@ const handlerFunctions = {
     const itemId = req.params.itemId;
     await Item.destroy({ where: { itemId: itemId } });
 
-    let items = await Item.findAll();
+    let items = await Item.findAll({
+      order: [["item_id", "DESC"]],
+    });
     res.send({ message: "Item deleted", allItems: items });
   },
 
@@ -272,7 +270,9 @@ const handlerFunctions = {
 
       await item.save();
 
-      const allItems = await Item.findAll();
+      const allItems = await Item.findAll({
+        order: [["item_id", "DESC"]],
+      });
 
       res.send({
         message: "Item details updated",
