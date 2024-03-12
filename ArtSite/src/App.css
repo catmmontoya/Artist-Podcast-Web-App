@@ -66,14 +66,39 @@ button {
   color: #888;
 }
 
+.notable-regular {
+  font-family: "Notable", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.self-img {
+  max-width: 600px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.self-text {
+  max-width: 600px;
+  float: right;
+}
+
+.about-container{
+  margin: 20px 20px 0 0;  
+  border: 4px solid #333;
+  border-radius:  10px;
+  max-width: 1300px;
+  padding: 40px;
+}
+
 header nav {
  display: flex;
  gap: 16px;
  justify-content: end; /* sends the nav items to the right */
- max-width: 1500px;
+ max-width: 1800px;
  margin: 0 auto;
  max-height: 80px;
- padding-bottom: 0px;;
+ padding-bottom: 0px;
 }
 
 header nav h1 {
@@ -113,8 +138,10 @@ img.btn-img {
 .cart {
   text-align: center;
 }
-/* 
+
 form {
   display: flex;
-  text-align: center;
-} */
+  justify-content: center; 
+  align-items: center;
+  margin-top: 10vh;
+}

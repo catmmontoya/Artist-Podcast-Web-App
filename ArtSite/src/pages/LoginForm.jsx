@@ -65,19 +65,29 @@ useEffect(() => {}, [])
     return (
         <form
         onSubmit={handleLogin}>
+            <div>
+
             <label htmlFor="username">Username:</label>
-            <input name="username" id="username" type="text" required onChange={(e) => setUsernameValue(e.target.value)} />
+            <input style={{width: "200px"}} name="username" id="username" type="text" required onChange={(e) => setUsernameValue(e.target.value)} />
+
+            <br/>
+
             <label htmlFor="password">Password:</label>
-            <input name="password" id="password" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
-            <button className="img-btn" type="submit">Log In</button>
+            <input style={{width: "200px", justifySelf: 'end'}} name="password" id="password" type="password" required onChange={(e) => setPasswordValue(e.target.value)} />
+            
+            <br/>
+
+            <button style={{ justifySelf: "center"}} className="img-btn" type="submit">Log In</button>
             <Form.Group className="mt-3" controlId="formCheckbox">
               <Form.Check
                 type="checkbox"
                 label="Admin"
                 checked={checked}
                 onChange={handleCheck}
-              />
+                />
             </Form.Group>
+                </div>
         </form>
     )
 }
+

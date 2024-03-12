@@ -32,17 +32,17 @@ let items = [
   {
     picture: "/images/tapestry4.jpg",
     itemName: "Arches Tapestry",
-    price: 100.0,
+    price: 80.0,
   },
   {
     picture: "/images/tapestry5.jpg",
     itemName: "Sands Tapestry",
-    price: 100.0,
+    price: 120.0,
   },
   {
     picture: "/images/tapestry6.jpg",
     itemName: "Plus Tapestry",
-    price: 100.0,
+    price: 70.0,
   },
   {
     picture: "/images/tapestry7.jpg",
@@ -52,12 +52,12 @@ let items = [
   {
     picture: "/images/tapestry8.jpg",
     itemName: "Funfetti Necklace",
-    price: 15.0,
+    price: 25.0,
   },
   {
     picture: "/images/tapestry9.jpg",
     itemName: "Galaxy Tapestry",
-    price: 100.0,
+    price: 200.0,
   },
 ];
 
@@ -67,12 +67,12 @@ for (const item of items) {
 
 let users = [
   {
-    username: "jess999",
+    username: "jess",
     email: "jess90@gmail.com",
     password: "reptiles",
   },
   {
-    username: "marslanding",
+    username: "mars",
     email: "fredflint@gmail.com",
     password: "reptiles",
   },

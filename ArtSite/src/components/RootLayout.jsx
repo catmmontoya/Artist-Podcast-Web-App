@@ -64,10 +64,11 @@ const buttonClick = async () => {
     <div className="root-layout">
       <header>
         <nav>
-          <h1>CAT MONTOYA</h1>
+          <h1 className="notable-regular">CAT MONTOYA</h1>
           <NavLink to="/">home</NavLink>
           <NavLink to="/blog">blog</NavLink>
           <NavLink to="/podcast">podcast</NavLink>
+          <NavLink to="/about">about</NavLink>
           {!userId && !adminId &&
           <button className="nav-btn">
               <NavLink to={"/login"}>Log In</NavLink>

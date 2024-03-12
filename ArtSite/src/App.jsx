@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Podcast from "./pages/Podcast"
 import LoginForm from './pages/LoginForm'
+import About from "./pages/About"
 
 //Layouts
 import RootLayout from './components/RootLayout'
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="blog" element={<Blog />} />
       <Route path="podcast" element={<Podcast />} />
+      <Route path="about" element={<About />} />
       <Route path="login" element={<LoginForm />} />
       <Route path="signup" element={<SignupForm />} />
       <Route path="cart" element={<Cart />} />
