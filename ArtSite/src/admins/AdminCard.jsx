@@ -79,7 +79,7 @@ const handleCancel = () => {
       </table>
     ) : (
       <table>
-      <tr className="admin-card">
+      <tr>
       <td>{item.itemId}</td>
       <td>
       <img className="card-img" src={item.picture} />

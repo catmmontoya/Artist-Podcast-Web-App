@@ -44,7 +44,10 @@ export default function Podcast() {
 
     return (
         <div>
-            <h4>Here's what I've been working and whose art I've been loving. Please respect the work creatives we have put out into the world!</h4>
+            <div className="pod-bio">
+                <img className="pod-pic" src="https://rachelcorbett.com.au/wp-content/uploads/2018/07/Neon-podcast-logo.jpg" />
+                <p>This podcast is all about the ups and downs of life for us girly pops - exploring love, faith transitions, our bodies and minds, and community. Enjoy!</p>
+            </div>
             {adminId && 
             <button className="img-btn" onClick={editMode}>Add Episode</button>
             }

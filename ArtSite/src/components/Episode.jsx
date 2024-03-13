@@ -48,6 +48,12 @@ const handleSubmit = (e) => {
     <div className="ep-card">
       <h2>{episode.episodeName}</h2>
       <p>{episode.episodeDescription}</p>
+      <a href="" >
+        <img className="ep-icon" src="https://content.clipchamp.com/content-repo/content/previews/cc_ed6522af4.png" />
+      </a>
+      <a href="" >
+        <img className="ep-icon" src="https://cdn-icons-png.freepik.com/512/10181/10181193.png" />
+      </a>
     </div>
     {adminId &&
     <button className="img-btn" onClick={handleDelete}>Delete</button>

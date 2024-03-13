@@ -59,17 +59,17 @@ export default function Home() {
         <div>
             <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
         </div>
-        <div className="shop-main">
         {adminId && 
                 <button className="img-btn" onClick={editMode}>Add Shop Item</button>
             }
+        <div className="shop-main">
             {isEditing &&
                 <>
                 <input value={picture} placeholder="Pic here" onChange={(e) => setPicture(e.target.value)} /> 
                 <input value={itemName} placeholder="Name" onChange={(e) => setItemName(e.target.value)} />
                 <input value={price} placeholder="Price" onChange={(e) => setPrice(e.target.value)} />
-                <button className="img-btn" onClick={handleSave}>Save</button>
-                <button className="img-btn" onClick={handleCancel}>Cancel</button>
+                <button className="save-btn" onClick={handleSave}>Save</button>
+                <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
                 </>
                 }  
                 {myContent}

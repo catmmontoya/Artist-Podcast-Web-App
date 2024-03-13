@@ -50,6 +50,19 @@ h4 {
   border-radius: 10px;
 }
 
+.ep-icon {
+  max-width: 80px;
+}
+
+.pod-pic {
+  width: 300px;
+  border-radius: 50px;
+}
+
+/* .pod-bio {
+  float: left;
+} */
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -124,6 +137,24 @@ img.card-img {
   margin-right: 5px;
 }
 
+.save-btn {
+  background-color: rgb(105, 133, 137);
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  max-width: 100px;
+  max-height: 40px;
+}
+
+.cancel-btn {
+  background-color: rgb(105, 133, 137);
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  max-width: 100px;
+  max-height: 40px;
+}
+
 .btn-img {
   max-width: 30px;
   background-color: rgb(105, 133, 137);
@@ -141,9 +172,11 @@ img.card-img {
   min-height: 200px;
   overflow-wrap: break-word;
   background-color: white;
+  /* display: flex;
+  float: right; */
 }
 
-admin-card {
+/* admin-card {
   border-radius: 10px;
   border: 2px solid black;
   margin: 1em;
@@ -154,7 +187,7 @@ admin-card {
   min-width: 270px;
   min-height: 450px;
   background-color: white;
-}
+} */
 
 .comments {
   border-radius: 10px;
