@@ -1,11 +1,5 @@
 #root {
-  /* color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424; */
-  /* max-width: 1280px; */
   margin: 0;
-  /* padding: 2rem;
-  text-align: center;  */
 }
 
 body {
@@ -28,6 +22,22 @@ button {
   color: white;
   cursor: pointer;
   background-color: darkslategray;
+}
+
+.footer {
+  min-height: 150px;
+  margin-top: 50px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.shop-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .logo {

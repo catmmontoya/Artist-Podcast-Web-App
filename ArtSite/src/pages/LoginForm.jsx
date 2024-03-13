@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { Form } from "react-bootstrap"
+import Footer from "../components/Footer"
 
 export default function LoginForm() {
     const [passwordValue, setPasswordValue] = useState('');
@@ -63,6 +64,7 @@ export default function LoginForm() {
 useEffect(() => {}, [])
 
     return (
+        <>
         <form
         onSubmit={handleLogin}>
             <div>
@@ -88,6 +90,8 @@ useEffect(() => {}, [])
             </Form.Group>
                 </div>
         </form>
+        <Footer />
+        </>
     )
 }
 

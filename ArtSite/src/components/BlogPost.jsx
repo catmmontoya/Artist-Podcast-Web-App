@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
+import Footer from "../components/Footer"
 
 function BlogPost({ post, setPosts }) {
   const userId = useSelector((state) => state.userId)
@@ -67,6 +68,7 @@ function BlogPost({ post, setPosts }) {
     <button onClick={handleSubmit}>Submit</button>
     </>
 }
+<Footer />
     </>     
   )
 }

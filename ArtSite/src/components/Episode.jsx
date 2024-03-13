@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
+import Footer from "../components/Footer"
 
 function Episode({ episode, setEpisodes }) {
 const userId = useSelector((state) => state.userId)
@@ -66,6 +67,7 @@ const handleSubmit = (e) => {
     <button onClick={handleSubmit}>Submit</button>
     </>
 }
+<Footer />
     </>
   )
 }

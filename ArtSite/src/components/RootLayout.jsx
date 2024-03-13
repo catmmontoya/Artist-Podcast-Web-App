@@ -98,5 +98,4 @@ const buttonClick = async () => {
   );
           }
 
-
 export default RootLayout;

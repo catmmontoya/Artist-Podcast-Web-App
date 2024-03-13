@@ -3,6 +3,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import AdminCard from "../admins/AdminCard"
+import Footer from "../components/Footer"
 
 export default function Home() {
     const [items, setItems] = useState([])
@@ -58,9 +59,10 @@ export default function Home() {
         <div>
             <h4>Welcome! This is home for my art and thoughts, as well as a place for you to find other artists like me</h4>
         </div>
+        <div className="shop-main">
         {adminId && 
                 <button className="img-btn" onClick={editMode}>Add Shop Item</button>
-                }
+            }
             {isEditing &&
                 <>
                 <input value={picture} placeholder="Pic here" onChange={(e) => setPicture(e.target.value)} /> 
@@ -71,6 +73,8 @@ export default function Home() {
                 </>
                 }  
                 {myContent}
+                </div>
+                <Footer />
         </>
     )
 }

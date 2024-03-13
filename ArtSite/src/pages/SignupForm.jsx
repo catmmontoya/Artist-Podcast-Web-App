@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import Footer from "../components/Footer"
 
 function SignupForm() {
     const [username, setUsername] = useState("")
@@ -38,6 +39,7 @@ function SignupForm() {
     }
 
   return (
+    <>
     <form
          onSubmit={handleSignup}>
             <h2>Let's set up your account!</h2>
@@ -55,6 +57,8 @@ function SignupForm() {
 
             <button type="submit">Sign Up</button>
         </form>
+        <Footer />
+        </>
   )
 }
 
