@@ -69,24 +69,24 @@ let users = [
   {
     username: "jess",
     email: "jess90@gmail.com",
-    password: "reptiles",
+    password: "rep",
   },
   {
     username: "mars",
     email: "fredflint@gmail.com",
-    password: "reptiles",
+    password: "rep",
   },
   {
-    username: "clairearnold",
+    username: "claire",
     email: "artsyfartsy@gmail.com",
-    password: "reptiles",
+    password: "rep",
   },
 ];
 
 const user1 = await User.create({
   username: "lee",
   email: "rj@gmail.com",
-  password: "santaclaus",
+  password: "rep",
 });
 
 for (const user of users) {
