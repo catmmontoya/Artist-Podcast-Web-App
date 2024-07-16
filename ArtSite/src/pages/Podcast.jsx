@@ -23,13 +23,16 @@ export default function Podcast() {
         const bodyObj = {
             episodeName,
             episodeDescription
-        }
+        };
 
-        await axios.post("/api/addEpisode", bodyObj)
-        .then((res) => {
-            epCards()
+        try { 
+            const res = await axios.post("/api/addEpisode", bodyObj);
+            epCards(res.data)
             setIsEditing(false)
-        })
+        } catch (error) {
+            console.error("Error adding episode:", error);
+        }
+        
     }
 
     const handleCancel = () => {

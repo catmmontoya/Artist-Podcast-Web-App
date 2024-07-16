@@ -42,7 +42,7 @@ function SignupForm() {
     <>
     <form
          onSubmit={handleSignup}>
-            <h2>Let's set up your account!</h2>
+            <h2>Let&apos;s set up your account!</h2>
             <label htmlFor="username">Create username:</label>
             <input name="username" id="username" type="text" required onChange={(e) => setUsername(e.target.value)} />
             
