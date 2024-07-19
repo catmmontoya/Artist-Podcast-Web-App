@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Footer from "../components/Footer"
+import { toast } from "react-toastify"
 
 function SignupForm() {
     const [username, setUsername] = useState("")
@@ -11,6 +12,7 @@ function SignupForm() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const notify = toast();
 
     const handleSignup = async (e) => {
         e.preventDefault();
