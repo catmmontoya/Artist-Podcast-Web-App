@@ -49,12 +49,6 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
-    case "ADMIN_AUTH":
-      return {
-        ...state,
-        adminId: action.payload,
-      };
-
     default:
       return state;
   }
