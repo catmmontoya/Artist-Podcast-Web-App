@@ -83,11 +83,11 @@ let users = [
   },
 ];
 
-const user1 = await User.create({
-  username: "lee",
-  email: "rj@gmail.com",
-  password: "rep",
-});
+// const user1 = await User.create({
+//   username: "lee",
+//   email: "rj@gmail.com",
+//   password: "rep",
+// });
 
 for (const user of users) {
   await User.create(user);
@@ -168,11 +168,11 @@ for (const post of posts) {
   await Post.create(post);
 }
 
-let comments = [
-  {
-    input: "this is fine.",
-  },
-];
+// let comments = [
+//   {
+//     input: "this is fine.",
+//   },
+// ];
 
 await Comment.create({
   input: "this is fine.",
