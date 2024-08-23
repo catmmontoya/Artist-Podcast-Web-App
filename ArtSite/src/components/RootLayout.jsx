@@ -64,7 +64,7 @@ const buttonClick = async () => {
     <div className="root-layout">
       <header>
         <nav>
-          <h1 className="notable-regular">CAT MONTOYA</h1>
+          <h1 className="notable-regular">Art Friends</h1>
           <NavLink to="/">home</NavLink>
           <NavLink to="/blog">blog</NavLink>
           <NavLink to="/podcast">podcast</NavLink>
